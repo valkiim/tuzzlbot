@@ -3,7 +3,8 @@ import discord
 from walletPile import walletPile
 from tuzzCoinCost import tuzzCoinCost
 from discord.ext import tasks, commands
-TOKEN = 'OTA0MjMyOTI1NTIyOTUyMjAy.YX4iiQ.wMIlXgdAKvRnWMTYWXIx1M-XbCA'
+tokenFile = open('token.txt', 'r')
+TOKEN = tokenFile.read()
 intents =discord.Intents().all()
 bot = commands.Bot(command_prefix="$", intents=intents)
 botRoomID = 899345648825032765
