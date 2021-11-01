@@ -12,28 +12,30 @@ class tuzzCoinCost(object):
     # Buying tuzzcoin increases value/cost by 1% per coin purchased (mult)
     # selling tuzzcoin decreases value/cost by 1% per coin sold (multiplicative)
     # Keep track of total currency value, and number of coins
-
+    CostFile = 'TuzzCoinCost.tc'
+    BankFile = 'TuzzCoinBank.tc'
+    TotlFile = 'TuzzCoinTotl.tc'
     coincosts = [69.00]
     coinInBank = [69]
     coinInTotl = [69]
     def __init__(self):
         random.seed()
         try:
-            with open('TuzzCoinCost.txt', 'rb') as CoinCostHistory:
+            with open(CostFile, 'rb') as CoinCostHistory:
                 self.coincosts = pickle.load(CoinCostHistory)
         except FileNotFoundError:
             #create a new coin history, right meow!
             self.coincosts = [69.00]
             #im not gunna bother saving THIS list because its a single unit, I'll sav eon update. 
         try:
-            with open('TuzzCoinBank.txt', 'rb') as CoinBank:
+            with open(BankFile, 'rb') as CoinBank:
                 self.coinInBank = pickle.load(CoinBank)
         except FileNotFoundError:
             #create a new coin history, right meow!
             self.coinInBank = [69.00]
             #im not gunna bother saving THIS list because its a single unit, I'll save on update
         try:
-            with open('TuzzCoinTotl.txt', 'rb') as CoinTotl:
+            with open(TotlFile, 'rb') as CoinTotl:
                 self.coinInTotl = pickle.load(CoinTotl)
         except FileNotFoundError:
             #create a new coin history, right meow!
@@ -79,12 +81,12 @@ class tuzzCoinCost(object):
     def getCost(self):
         return self.coincosts[-1]
     def saveCosts(self):
-        with open('TuzzCoinCost.txt', 'wb') as CoinCostHistory:
+        with open(CostFile, 'wb') as CoinCostHistory:
             pickle.dump(self.coincosts, CoinCostHistory)
         return
     def saveNums(self):
-        with open('TuzzCoinBank.txt', 'wb') as CoinBank:
+        with open(BankFile, 'wb') as CoinBank:
             pickle.dump(self.coinInBank, CoinBank)
-        with open('TuzzCoinTotl.txt', 'wb') as CoinTotl:
+        with open(TotlFile, 'wb') as CoinTotl:
             pickle.dump(self.coinInTotl, CoinTotl)
 

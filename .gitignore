@@ -9,6 +9,7 @@
 
 #not for gamers!
 token.txt
+*.tc
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
