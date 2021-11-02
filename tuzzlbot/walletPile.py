@@ -6,13 +6,13 @@ class walletPile(object):
 
     def saveWallet(self, wallet):
         # export a wallet to file, carry on with life
-        with open(str(wallet.ID)+'.txt', 'wb') as walletExportFile:
+        with open(str(wallet.ID)+'.tc', 'wb') as walletExportFile:
             pickle.dump(wallet, walletExportFile)
 
     def loadWallet(self, inputID):
         # check for file with inputID.txt
         try:
-            with open(str(inputID)+'.txt', 'rb') as walletImportFile:
+            with open(str(inputID)+'.tc', 'rb') as walletImportFile:
                 loadedWallet = pickle.load(walletImportFile)
         except FileNotFoundError:
             #create a new wallet w/ 0 tuzzcoin

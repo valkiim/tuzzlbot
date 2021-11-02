@@ -82,8 +82,30 @@ async def get_coinval(ctx):
     ValPerCoin = round(TotlCoinVal / float(NumCoinsTotl), 2)
     await ctx.send('There are {} coins in rotation, {} are in the bank.\nAt {} USD per coin, the Currency is worth {} USD in total.'.format(NumCoinsTotl, NumCoinsBank, ValPerCoin, TotlCoinVal))
     #returns the current tuzzcoin value
-
-
+@bot.command(name='give')
+async def destructiveGive(ctx, target:discord.Member, num):
+    usrWallet = WP.loadWallet(ctx.message.author.id)
+    try:
+        number = int(num)
+    except ValueError:
+        await ctx.send('Transaction Failed, Try \"**$give** [name] [num]\"!')
+    else:
+        if(usrWallet.coins >= number and number >=2):
+            gifteeWallet = WP.loadWallet(target.id)
+            gifteeGains = int(number*0.60)
+            lostCoins = number-gifteeGains
+            usrWallet.coins -= number
+            gifteeWallet.coins += gifteeGains
+            CC.coinInTotl.append(CC.coinInTotl[-1]-lostCoins)
+            WP.saveWallet(usrWallet)
+            WP.saveWallet(gifteeWallet)
+            await ctx.send('{} Tried to give {} {} coins, but {} floated off!'.format(ctx.author, target.mention, number, lostCoins))
+            #code for Do The Thing
+        else:
+            if(number < 2):
+                await ctx.send("You cannot give less than 1 coin!")
+            else:
+                await ctx.send("Unfortunately, you do not have enough TuzzCoin to be that Generous.")
 @bot.command(name='ping')
 async def pongreply(ctx):
     await ctx.send('Pong!')
