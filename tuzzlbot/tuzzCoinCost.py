@@ -44,7 +44,7 @@ class tuzzCoinCost(object):
 
     def costFluxuation(self):
         #causes a price fluxuation of 5% when triggered
-        flux = float(random.randint(-5, 5))/100.0
+        flux = float(random.randint(-20, 20))/100.0
         self.AdjustCost(1+flux)
         return
     def makeTuzzCoin(self, Number):
@@ -71,7 +71,8 @@ class tuzzCoinCost(object):
         self.saveNums()
         return transCost
     def AdjustCost(self, flux):
-        flux = min(flux, 1.05)
+        flux = min(flux, 1.20)
+        flux = max(flux, 0.80)
         print("Flux = {}".format(flux))
         self.coincosts.append(self.coincosts[-1]*(flux))
         self.saveCosts()

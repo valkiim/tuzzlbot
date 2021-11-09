@@ -132,8 +132,6 @@ async def buyTuzzCoin(ctx, num):
         elif (number == 0):
             await ctx.send('Do you think this is a fucking Joke?')
             await ctx.send('It is a joke. Buy Tuzzleton!')
-        elif (number > 128):
-            await ctx.send('Due to market regulations, there is a limit of 128 TuzzCoin per purchase.')
         elif (number > CC.coinInBank[-1]):
             await ctx.send('I\'m Sorry, we do not have enough TuzzCoins. Please $make some!')
         else:
@@ -150,7 +148,7 @@ async def makeTuzzCoin(ctx, num):
     except ValueError:
         await ctx.send('Transaction Failed, Try \"**$make** [num]\"!')
     else:
-        if(number <= 69 and number > 9):
+        if(number > 9):
             CC.makeTuzzCoin(number)
             if(number== 69):
                 await ctx.send('Nice.')
@@ -160,7 +158,7 @@ async def makeTuzzCoin(ctx, num):
             usrWallet.coins += 5
             WP.saveWallet(usrWallet)
         else:
-            await ctx.send('Modern tuzzcoin production can only handle 10-69 coins per function')
+            await ctx.send('Modern tuzzcoin must be produced in batches of 10 or more.')
 
 @bot.command(name='sell all')
 async def sellAllCoin(ctx):
