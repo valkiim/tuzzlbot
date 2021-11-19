@@ -17,7 +17,7 @@ async def flux():
     print("Five minute flux applied")
     ## economy sanity checks
     pricePer = CC.coincosts[-1]/CC.coinInTotl[-1]
-    if (CC.coinInBank > 10000):
+    if (CC.coinInBank[-1] > 10000):
         print('Too many coins in Rotation!')
         await botRoom.send('Something is happening at the bank!')
         await botRoom.send('It looks like coins are missing, and a lizard blimp has floated away!')
