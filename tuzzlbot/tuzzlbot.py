@@ -13,22 +13,28 @@ botRoomID = 899345648825032765
 @tasks.loop(minutes=5)
 async def flux():
     CC.costFluxuation()
+    botRoom = bot.get_channel(botRoomID)
     print("Five minute flux applied")
     ## economy sanity checks
     pricePer = CC.coincosts[-1]/CC.coinInTotl[-1]
+    if (CC.coinInBank > 10000):
+        print('Too many coins in Rotation!')
+        await botRoom.send('Something is happening at the bank!')
+        await botRoom.send('It looks like coins are missing, and a lizard blimp has floated away!')
+        CC.coinInBank.append(CC.coinInBank[-1]-10000)
+        CC.coinInTotl.append(CC.coinInTotl[-1]-10000)
+        CC.saveNums()
     if (pricePer < 0.01):
-        botRoom = bot.get_channel(botRoomID)
         print('currency value negative, Inflating')
         await botRoom.send('THE ECONOMY IS IN SHAMBLES!')
         await botRoom.send('Processing Government Bailout...')
-        CC.coincosts.append(CC.coinInTotl[-1]*0.02)
+        CC.coincosts.append(CC.coinInTotl[-1]*1.69)
         CC.saveCosts()
     elif (pricePer > 1000000000.00):
-        botRoom = bot.get_channel(botRoomID)
         print('Currency worth too much, Flooring')
         await botRoom.send('TO THE MOON!')
         await botRoom.send('wait where did the money go...')
-        CC.coincosts.append(50000.00)
+        CC.coincosts.append(CC.coinInTotl[-1]*1000000.69)
         CC.saveCosts()
 
 

@@ -43,8 +43,8 @@ class tuzzCoinCost(object):
             return
 
     def costFluxuation(self):
-        #causes a price fluxuation of 5% when triggered
-        flux = float(random.randint(-20, 20))/100.0
+        #causes a price fluxuation of 10% when triggered
+        flux = float(random.randint(-9, 10))/100.0
         self.AdjustCost(1+flux)
         return
     def makeTuzzCoin(self, Number):
