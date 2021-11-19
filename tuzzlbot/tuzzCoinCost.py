@@ -57,7 +57,7 @@ class tuzzCoinCost(object):
         # returns cost of buying X tuzzcoin, then increases the cost of tuzzcoin
         transCost = (Number * self.coincosts[-1])/self.coinInTotl[-1]
         self.coinInBank.append(self.coinInBank[-1]-Number)
-        self.AdjustCost(math.pow(1.01, Number))
+        self.AdjustCost(math.pow(1.01, math.min(Number, 100)))
         self.saveCosts()
         self.saveNums()
         return transCost
@@ -66,7 +66,7 @@ class tuzzCoinCost(object):
         #tuzzcoin is sold at 80% market price
         transCost = (Number * self.coincosts[-1]*0.8)/(self.coinInTotl[-1])
         self.coinInBank.append(self.coinInBank[-1]+Number)
-        self.AdjustCost(math.pow(0.95, Number))
+        self.AdjustCost(math.pow(0.95, math.min(Number, 100)))
         self.saveCosts()
         self.saveNums()
         return transCost
